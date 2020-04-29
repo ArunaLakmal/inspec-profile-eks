@@ -25,7 +25,7 @@ supports:
 depends:
 - name: inspec-aws
   git: https://github.com/inspec/inspec-aws.git
-  tag: v1.6.8
+  tag: v1.7.0
 attributes:
 - name: awsregion
   description: 'The AWS Region where the EKS cluster lives'
