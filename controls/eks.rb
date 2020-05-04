@@ -16,6 +16,7 @@ title 'Evaluate EKS Cluster Configuration Best Practices'
 
 awsregion = attribute('awsregion')
 clustername = attribute('clustername')
+bucketname = attribute('bucketname')
 
 control 'eks-1' do
   impact 0.9
@@ -205,8 +206,8 @@ control 'eks-8' do
   ref "EKS Upgrades", url: "https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html"
   ref "EKS Versions", url: "https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html"
 
-  describe "#{aws_s3_bucket}: bucket existance" do
-    subject { aws_s3_bucket(bucket_name: "datalake-demo-test", aws_region: awsregion)}
+  describe "#{bucketname}: bucket existance" do
+    subject { aws_s3_bucket(bucket_name: "datalake-demo-test")}
     it { should exist }
   end
 end
