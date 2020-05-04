@@ -206,8 +206,10 @@ control 'eks-8' do
   ref "EKS Upgrades", url: "https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html"
   ref "EKS Versions", url: "https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html"
 
-  describe "#{bucketname}: bucket existance" do
-    subject { aws_s3_bucket(bucket_name: bucketname)}
+  # describe "#{bucketname}: bucket existance" do
+  #   subject { aws_s3_bucket(bucket_name: bucketname)}
+  #   it { should exist }
+  describe aws_s3_bucket(bucket_name: bucketname) do
     it { should exist }
   end
 end
