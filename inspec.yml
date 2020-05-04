@@ -37,3 +37,8 @@ attributes:
   required: true
   value: ""
   type: string
+- name: bucketname
+  description: "S3 bucket name"
+  required: true
+  value: ""
+  type: string
