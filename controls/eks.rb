@@ -205,7 +205,8 @@ control 'eks-8' do
   ref "EKS Upgrades", url: "https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html"
   ref "EKS Versions", url: "https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html"
 
-  describe aws_s3_bucket('test_bucket') do
+  describe "#{aws_s3_bucket}: bucket existance" do
+    subject { aws_s3_bucket(bucket_name: "datalake-demo-test", aws_region: awsregion)}
     it { should exist }
   end
 end
