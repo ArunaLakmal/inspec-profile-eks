@@ -225,13 +225,11 @@ control 'eks-9' do
   tag resource: "EKS"
   tag effort: 0.5
 
-  ref "EKS Upgrades", url: "https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html"
-  ref "EKS Versions", url: "https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html"
+  ref "EKS Upgrades", url: "#"
+  ref "EKS Versions", url: "#"
 
   describe "#{awsregion}/#{clustername}: tags" do
     subject { aws_eks_cluster(cluster_name: clustername, aws_region: awsregion)}
-    its('tags') { should include(:Environment => 'test',
-                                     :Inspec => 'mkit',
-                                     :Name => 'BitesizeEKStest')}
+    its(:tags) { should include({ :key => 'Inspec', :value => 'mkit' }) }
   end
 end
