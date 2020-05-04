@@ -166,3 +166,25 @@ control 'eks-6' do
     end
   end
 end
+#-------------------------Custom rules specifications----------------------------------
+control 'eks-7' do
+  impact 0.7
+  title 'Ensure the the EKS Cluster is on the correct VPC'
+
+  desc "Bitesize EKS cluster Status should be active"
+  desc "remediation", "Check the reson behind this status"
+  desc "validation", "verify the cluster status again!"
+
+  tag platform: "AWS"
+  tag category: "Management and Governance"
+  tag resource: "EKS"
+  tag effort: 0.5
+
+  ref "EKS Upgrades", url: "https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html"
+  ref "EKS Versions", url: "https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html"
+
+  describe "#{awsregion}/#{clustername}: status" do
+    subject { aws_eks_cluster(cluster_name: clustername, aws_region: awsregion)}
+    its('status') { should eq 'ACTIVE' }
+  end
+end
