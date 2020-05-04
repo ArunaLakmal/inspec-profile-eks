@@ -211,3 +211,27 @@ control 'eks-8' do
     it { should exist }
   end
 end
+
+control 'eks-9' do
+  impact 0.1
+  title 'Tag compatibility'
+
+  desc "Check the required tags are in place"
+  desc "remediation", "Add correct and required tags"
+  desc "validation", "verify the cluster tags again!"
+
+  tag platform: "AWS"
+  tag category: "Management and Governance"
+  tag resource: "EKS"
+  tag effort: 0.5
+
+  ref "EKS Upgrades", url: "https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html"
+  ref "EKS Versions", url: "https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html"
+
+  describe "#{awsregion}/#{clustername}: tag compliance" do
+    subject { aws_eks_cluster(cluster_name: clustername, aws_region: awsregion)}
+    its('tags') { should include(:Environment => 'test',
+                                     :Name => 'bucket-name',
+                                     :Inspec => 'mkit')}
+  end
+end
