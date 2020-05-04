@@ -169,10 +169,10 @@ end
 #-------------------------Custom rules specifications----------------------------------
 control 'eks-7' do
   impact 0.7
-  title 'Ensure the the EKS Cluster is on the correct VPC'
+  title 'Ensure the the EKS Cluster Status is ACTIVE'
 
-  desc "Bitesize EKS cluster Status should be active"
-  desc "remediation", "Check the reson behind this status"
+  desc "Bitesize EKS cluster Status should be ACTIVE"
+  desc "remediation", "Diagnose the reson behind this status"
   desc "validation", "verify the cluster status again!"
 
   tag platform: "AWS"
@@ -186,5 +186,26 @@ control 'eks-7' do
   describe "#{awsregion}/#{clustername}: status" do
     subject { aws_eks_cluster(cluster_name: clustername, aws_region: awsregion)}
     its('status') { should eq 'ACTIVE' }
+  end
+end
+
+control 'eks-8' do
+  impact 0.4
+  title 'Check a bucket existance'
+
+  desc "Custom rule to test non EKS objects, checking a S3 bucket existance"
+  desc "remediation", "Check the bucket status, if not create a bucket"
+  desc "validation", "verify the bucket again!"
+
+  tag platform: "AWS"
+  tag category: "Management and Governance"
+  tag resource: "S3"
+  tag effort: 0.5
+
+  ref "EKS Upgrades", url: "https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html"
+  ref "EKS Versions", url: "https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html"
+
+  describe aws_s3_bucket('test_bucket') do
+    it { should exist }
   end
 end
