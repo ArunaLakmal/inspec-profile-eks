@@ -228,7 +228,7 @@ control 'eks-9' do
   ref "EKS Upgrades", url: "https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html"
   ref "EKS Versions", url: "https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html"
 
-  describe "#{awsregion}/#{clustername}: tag compliance" do
+  describe "#{awsregion}/#{clustername}: tag" do
     subject { aws_eks_cluster(cluster_name: clustername, aws_region: awsregion)}
     its('tags') { should include(:Environment => 'test',
                                      :Inspec => 'mkit',
