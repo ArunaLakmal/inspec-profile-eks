@@ -207,7 +207,7 @@ control 'eks-8' do
   ref "EKS Versions", url: "https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html"
 
   describe "#{bucketname}: bucket existance" do
-    subject { aws_s3_bucket(bucket_name: "datalake-demo-test")}
+    subject { aws_s3_bucket(bucket_name: bucketname)}
     it { should exist }
   end
 end
