@@ -231,6 +231,7 @@ control 'eks-9' do
   describe "#{awsregion}/#{clustername}: tag compliance" do
     subject { aws_eks_cluster(cluster_name: clustername, aws_region: awsregion)}
     its('tags') { should include(:Environment => 'test',
-                                     :Inspec => 'mkit')}
+                                     :Inspec => 'mkit',
+                                     :Name => 'BitesizeEKStest')}
   end
 end
