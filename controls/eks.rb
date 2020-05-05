@@ -228,7 +228,7 @@ control 'eks-9' do
   ref "EKS Upgrades", url: "#"
   ref "EKS Versions", url: "#"
 
-  describe "#{awsregion}/#{clustername}/#{tags}: tags" do
+  describe "#{awsregion}/#{clustername}: tags" do
     subject { aws_eks_cluster(cluster_name: clustername, aws_region: awsregion)}
     its('tags') { should include( :key => 'Inspec', :value => 'mkit' ) }
   end
