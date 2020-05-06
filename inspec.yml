@@ -7,3 +7,14 @@ depends:
     url: https://github.com/inspec/inspec-aws/archive/master.tar.gz
 supports:
   - platform: aws
+ attributes:
+- name: awsregion
+  description: 'The AWS Region where the EKS cluster lives'
+  required: true
+  value: ""
+  type: string
+- name: clustername
+  description: 'The EKS cluster name'
+  required: true
+  value: ""
+  type: string
