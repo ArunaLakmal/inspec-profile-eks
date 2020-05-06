@@ -230,6 +230,6 @@ control 'eks-9' do
 
   describe "#{awsregion}/#{clustername}: tags" do
     subject { aws_eks_cluster(cluster_name: clustername, aws_region: awsregion)}
-    its('tags') { should include( :key => 'Inspec', :value => 'mkit' ) }
+    its(:tags) { should include( "Environment" => "test", "Inspec" => "mkit", "Name" => "BitesizeEKStest" ) }
   end
 end
