@@ -207,6 +207,7 @@ control 'eks-8' do
   ref "EKS Versions", url: "https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html"
 
   describe aws_s3_bucket('mkit-test') do
+    subject { aws_s3_bucket(bucket_name: 'mkit-test')}
     it { should exist }
   end
 end
