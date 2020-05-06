@@ -206,8 +206,8 @@ control 'eks-8' do
   ref "EKS Upgrades", url: "https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html"
   ref "EKS Versions", url: "https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html"
 
-  describe aws_s3_bucket('mkit-test') do
-    subject { aws_s3_bucket(bucket_name: 'mkit-test')}
+  describe "#{bucketname}: bucket" do
+    subject { aws_s3_bucket(bucket_name: bucketname)}
     it { should exist }
   end
 end
