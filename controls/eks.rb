@@ -210,8 +210,8 @@ control 'eks-8' do
   #   subject { aws_s3_bucket(bucket_name: bucketname)}
   #   it { should exist }
   # end
-  describe aws_s3_bucket('mkit-test') do
-    subject { aws_s3_bucket(bucket_name: 'mkit-test')}
+  describe aws_s3_bucket(bucketname) do
+    subject { aws_s3_bucket(bucket_name: bucketname)}
     it { should exist }
   end
 end
