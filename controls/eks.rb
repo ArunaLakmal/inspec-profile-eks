@@ -237,3 +237,25 @@ control 'eks-9' do
     its(:tags) { should include( "Environment" => "test", "Inspec" => "mkit", "Name" => "BitesizeEKStest" ) }
   end
 end
+
+control 'eks-10' do
+  impact 0.4
+  title 'Check EKS Role for existance'
+
+  desc "This test check the EKS cluster role"
+  desc "remediation", "Ensure EKS Cluster role to be provisioned"
+  desc "validation", "verify the Role again!"
+
+  tag platform: "AWS"
+  tag category: "Management and Governance"
+  tag resource: "S3"
+  tag effort: 0.5
+
+  ref "EKS Upgrades", url: "https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html"
+  ref "EKS Versions", url: "https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html"
+
+  describe aws_iam_role('eksServiceRole') do
+    subject { aws_iam_role(role_name: 'eksServiceRole')}
+    it { should exist }
+  end
+end
